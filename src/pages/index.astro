@@ -12,9 +12,19 @@ const reviews = [
 ];
 
 const pricing = [
-  { title: 'Hora suelta', price: '20', unit: '/hora', description: 'Ideal para reuniones cortas o meriendas', features: ['Uso del local completo', 'Parque de bolas incluido', 'Mesas y sillas'] },
-  { title: 'Pack Fiesta', price: '50', unit: '/3 horas', description: 'Lo más elegido para cumpleaños', features: ['3 horas de diversión', 'Parque de bolas incluido', 'Zona merienda preparada', 'Limpieza incluida'], popular: true },
-  { title: 'Pack Premium', price: '80', unit: '/5 horas', description: 'Para celebraciones sin prisas', features: ['5 horas completas', 'Todo incluido', 'Decoración básica', 'Limpieza incluida', 'Flexibilidad total'] },
+  { title: 'Mañanas', rows: [
+    { label: 'Lunes a Viernes', time: '9:00–14:00', price: '95' },
+    { label: 'Sábados y Domingos', time: '9:00–13:00', price: '95' },
+  ]},
+  { title: 'Tardes', time: '15:00–21:00', rows: [
+    { label: 'Lunes a Jueves', price: '125' },
+    { label: 'Viernes y víspera de festivo', price: '140' },
+    { label: 'Sábados, domingos y festivos', price: '160' },
+  ]},
+  { title: 'Hora extra', rows: [
+    { label: 'Lunes a Jueves', price: '20' },
+    { label: 'Vie, Sáb, Dom y festivos', price: '35' },
+  ]},
 ];
 
 const features = [
@@ -552,56 +562,37 @@ const schedule = [
     }
     .pricing-card {
       background: var(--clr-surface); border-radius: var(--radius);
-      padding: 2rem; text-align: center;
-      box-shadow: var(--shadow); border: 2px solid transparent;
-      transition: var(--transition); position: relative;
-    }
-    .pricing-card.popular {
-      border-color: var(--clr-primary);
-      transform: scale(1.05);
-      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow); border: 1px solid rgba(108,63,197,.06);
+      transition: var(--transition);
     }
     .pricing-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
-    .pricing-card.popular:hover {
-      transform: scale(1.05) translateY(-4px);
-    }
-    .pricing-badge {
-      position: absolute; top: -12px; left: 50%;
-      transform: translateX(-50%);
+    .pricing-card-header {
       background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
-      color: #fff; padding: .3rem 1.2rem; border-radius: 50px;
-      font-size: .75rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .05em;
+      color: #fff; padding: 1rem 1.5rem;
+      font-weight: 800; font-size: 1.1rem; text-align: center;
     }
-    .pricing-title {
-      font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem;
+    .pricing-card-header small {
+      display: block; font-weight: 500; font-size: .8rem;
+      opacity: .85; margin-top: .2rem;
     }
-    .pricing-price {
-      font-size: 2.8rem; font-weight: 900;
-      color: var(--clr-primary); line-height: 1;
-      margin-bottom: .25rem;
+    .pricing-card-body { padding: 1.25rem 1.5rem; }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .7rem 0;
+      border-bottom: 1px solid rgba(108,63,197,.06);
     }
-    .pricing-price span { font-size: 1rem; font-weight: 600; color: var(--clr-text-muted); }
-    .pricing-desc {
-      font-size: .85rem; color: var(--clr-text-muted);
-      margin-bottom: 1.25rem;
+    .pricing-row:last-child { border-bottom: none; }
+    .pricing-label { font-size: .9rem; font-weight: 600; }
+    .pricing-label small { display: block; font-weight: 400; color: var(--clr-text-muted); font-size: .8rem; }
+    .pricing-amount {
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--clr-primary); white-space: nowrap;
     }
-    .pricing-features {
-      list-style: none; text-align: left;
-      margin-bottom: 1.5rem;
-    }
-    .pricing-features li {
-      padding: .4rem 0; font-size: .9rem;
-      display: flex; align-items: center; gap: .5rem;
-      border-bottom: 1px solid rgba(108,63,197,.05);
-    }
-    .pricing-features li:last-child { border-bottom: none; }
-    .pricing-check {
-      color: var(--clr-mint); font-weight: 700; flex-shrink: 0;
-    }
+    .pricing-amount span { font-size: .85rem; font-weight: 600; }
 
     /* ── Mobile menu ── */
     .navbar-links.active {
@@ -630,8 +621,6 @@ const schedule = [
       .features-grid { grid-template-columns: 1fr 1fr; }
       .reviews-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
-      .pricing-card.popular { transform: none; }
-      .pricing-card.popular:hover { transform: translateY(-4px); }
       .gallery-grid { grid-template-columns: 1fr; }
       section { padding: 3.5rem 1.25rem; }
     }
@@ -778,23 +767,31 @@ const schedule = [
     <div class="container text-center">
       <span class="section-label">Precios</span>
       <h2 class="section-title">Tarifas para tu celebración</h2>
-      <p class="section-subtitle mx-auto">Precios accesibles para que celebrar sea fácil. Desde 20 euros la hora.</p>
+      <p class="section-subtitle mx-auto">Consulta nuestras tarifas y elige la que mejor se adapte a tu evento.</p>
       <div class="pricing-grid">
         {pricing.map(p => (
-          <div class={`pricing-card ${p.popular ? 'popular' : ''}`}>
-            {p.popular && <span class="pricing-badge">Más elegido</span>}
-            <h3 class="pricing-title">{p.title}</h3>
-            <div class="pricing-price">{p.price}€ <span>{p.unit}</span></div>
-            <p class="pricing-desc">{p.description}</p>
-            <ul class="pricing-features">
-              {p.features.map(f => (
-                <li><span class="pricing-check">✓</span> {f}</li>
+          <div class="pricing-card">
+            <div class="pricing-card-header">
+              {p.title}
+              {p.time && <small>{p.time}</small>}
+            </div>
+            <div class="pricing-card-body">
+              {p.rows.map(r => (
+                <div class="pricing-row">
+                  <span class="pricing-label">
+                    {r.label}
+                    {r.time && <small>{r.time}</small>}
+                  </span>
+                  <span class="pricing-amount">{r.price}<span>€</span></span>
+                </div>
               ))}
-            </ul>
-            <a href="tel:+34610050723" class="btn btn-primary" style="width:100%;justify-content:center;">Reservar</a>
+            </div>
           </div>
         ))}
       </div>
+      <p style="margin-top:1.5rem; font-size:.9rem; color:var(--clr-text-muted);">
+        Consulta nuestra <strong>tarifa especial</strong> para día completo. Llámanos para más info.
+      </p>
     </div>
   </section>
 
