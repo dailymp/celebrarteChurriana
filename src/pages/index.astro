@@ -440,8 +440,40 @@ const schedule = [
       75%  { margin-left: 15px; }
     }
 
+    /* ── Floating Balloons ── */
+    .balloon {
+      position: absolute; bottom: -60px;
+      width: 18px; height: 22px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: .3;
+      animation: balloonFloat linear infinite, balloonDrift ease-in-out infinite;
+    }
+    .balloon::after {
+      content: ''; position: absolute;
+      bottom: -8px; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 8px;
+      background: rgba(0,0,0,.15);
+    }
+
+    .balloon:nth-child(1)  { left: 8%;  background: var(--clr-primary-light); width: 16px; height: 20px; animation-duration: 18s, 5s; animation-delay: 2s; opacity: .25; }
+    .balloon:nth-child(2)  { left: 22%; background: var(--clr-accent-dark);   width: 14px; height: 18px; animation-duration: 22s, 6s; animation-delay: 5s; opacity: .2; }
+    .balloon:nth-child(3)  { left: 45%; background: #F472B6;                  width: 18px; height: 22px; animation-duration: 20s, 4.5s; animation-delay: 0s; opacity: .25; }
+    .balloon:nth-child(4)  { left: 65%; background: var(--clr-primary);        width: 15px; height: 19px; animation-duration: 24s, 5.5s; animation-delay: 8s; opacity: .2; }
+    .balloon:nth-child(5)  { left: 82%; background: var(--clr-mint);           width: 17px; height: 21px; animation-duration: 19s, 4s; animation-delay: 3s; opacity: .25; }
+    .balloon:nth-child(6)  { left: 93%; background: #C084FC;                   width: 13px; height: 17px; animation-duration: 25s, 6.5s; animation-delay: 10s; opacity: .2; }
+
+    @keyframes balloonFloat {
+      0%   { bottom: -8%; transform: rotate(0deg); }
+      100% { bottom: 110%; transform: rotate(15deg); }
+    }
+    @keyframes balloonDrift {
+      0%, 100% { margin-left: 0; }
+      33%  { margin-left: 20px; }
+      66%  { margin-left: -15px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .confetti { animation: none; display: none; }
+      .confetti, .balloon { animation: none; display: none; }
     }
 
     /* ── Responsive ── */
@@ -460,7 +492,7 @@ const schedule = [
     }
   </style>
 
-  <!-- Confetti Rain -->
+  <!-- Confetti & Balloons -->
   <div class="confetti-container" aria-hidden="true">
     <div class="confetti"></div>
     <div class="confetti"></div>
@@ -477,6 +509,12 @@ const schedule = [
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
   </div>
 
   <!-- Navbar -->
