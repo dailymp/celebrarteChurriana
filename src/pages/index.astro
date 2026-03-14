@@ -68,7 +68,7 @@ const schedule = [
     }
     .navbar-brand {
       font-size: 1.35rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--clr-primary), var(--clr-mint));
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -199,6 +199,18 @@ const schedule = [
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ── Celebration pattern background ── */
+    .celebration-bg {
+      position: relative;
+    }
+    .celebration-bg::before {
+      content: ''; position: absolute; inset: 0;
+      opacity: .04; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ctext x='20' y='40' font-size='24'%3E%F0%9F%8E%88%3C/text%3E%3Ctext x='120' y='80' font-size='18'%3E%E2%AD%90%3C/text%3E%3Ctext x='60' y='130' font-size='20'%3E%F0%9F%8E%89%3C/text%3E%3Ctext x='150' y='170' font-size='22'%3E%F0%9F%8E%8A%3C/text%3E%3Ctext x='30' y='180' font-size='16'%3E%E2%9C%A8%3C/text%3E%3Ctext x='160' y='30' font-size='18'%3E%F0%9F%8E%81%3C/text%3E%3Ctext x='90' y='60' font-size='14'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      background-attachment: fixed;
     }
 
     /* ── Section common ── */
@@ -346,7 +358,9 @@ const schedule = [
     .cta-phone {
       display: inline-flex; align-items: center; gap: .75rem;
       font-size: 1.8rem; font-weight: 900;
-      color: var(--clr-accent);
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 1.5rem;
     }
 
@@ -364,7 +378,7 @@ const schedule = [
       text-align: center; padding: 2.5rem 2rem;
       font-size: .85rem;
     }
-    footer a { color: var(--clr-accent); }
+    footer a { color: var(--clr-orange-light); }
     footer .footer-brand {
       font-size: 1.2rem; font-weight: 800; color: #fff;
       margin-bottom: .5rem; display: block;
@@ -397,7 +411,7 @@ const schedule = [
       font-size: .8rem; color: rgba(255,255,255,.4);
     }
     .footer-credits a {
-      color: var(--clr-accent); font-weight: 600;
+      color: var(--clr-orange-light); font-weight: 600;
     }
 
     /* ── Confetti Rain ── */
@@ -416,20 +430,20 @@ const schedule = [
     .confetti:nth-child(5n) { width: 6px; height: 6px; border-radius: 50%; }
 
     .confetti:nth-child(1)  { left: 3%;  background: #8B5CF6; animation-duration: 8s, 3s;  animation-delay: 0s; opacity: .5; }
-    .confetti:nth-child(2)  { left: 10%; background: #6EE7B7; animation-duration: 10s, 4s; animation-delay: 1s; opacity: .4; }
+    .confetti:nth-child(2)  { left: 10%; background: #F59E0B; animation-duration: 10s, 4s; animation-delay: 1s; opacity: .4; }
     .confetti:nth-child(3)  { left: 18%; background: #F472B6; animation-duration: 7s, 2.5s; animation-delay: 2s; opacity: .55; }
     .confetti:nth-child(4)  { left: 25%; background: #A78BFA; animation-duration: 11s, 3.5s; animation-delay: 0.5s; opacity: .45; }
     .confetti:nth-child(5)  { left: 33%; background: #34D399; animation-duration: 9s, 4.5s; animation-delay: 3s; opacity: .5; }
     .confetti:nth-child(6)  { left: 40%; background: #FCD34D; animation-duration: 8.5s, 3s; animation-delay: 1.5s; opacity: .4; }
     .confetti:nth-child(7)  { left: 48%; background: #818CF8; animation-duration: 12s, 5s; animation-delay: 0.8s; opacity: .35; }
-    .confetti:nth-child(8)  { left: 55%; background: #6EE7B7; animation-duration: 7.5s, 2.8s; animation-delay: 2.5s; opacity: .5; }
+    .confetti:nth-child(8)  { left: 55%; background: #FBBF24; animation-duration: 7.5s, 2.8s; animation-delay: 2.5s; opacity: .5; }
     .confetti:nth-child(9)  { left: 63%; background: #F472B6; animation-duration: 10.5s, 4.2s; animation-delay: 1.2s; opacity: .45; }
     .confetti:nth-child(10) { left: 70%; background: #C084FC; animation-duration: 9.5s, 3.8s; animation-delay: 3.5s; opacity: .4; }
     .confetti:nth-child(11) { left: 78%; background: #34D399; animation-duration: 8s, 3.2s; animation-delay: 0.3s; opacity: .5; }
     .confetti:nth-child(12) { left: 85%; background: #FCD34D; animation-duration: 11.5s, 4.8s; animation-delay: 2s; opacity: .35; }
     .confetti:nth-child(13) { left: 92%; background: #8B5CF6; animation-duration: 7.8s, 2.6s; animation-delay: 1.8s; opacity: .45; }
     .confetti:nth-child(14) { left: 7%;  background: #A78BFA; animation-duration: 10s, 3.6s; animation-delay: 4s; opacity: .4; }
-    .confetti:nth-child(15) { left: 52%; background: #6EE7B7; animation-duration: 9s, 4s;  animation-delay: 0.6s; opacity: .5; }
+    .confetti:nth-child(15) { left: 52%; background: #F59E0B; animation-duration: 9s, 4s;  animation-delay: 0.6s; opacity: .5; }
 
     @keyframes confettiFall {
       0%   { top: -5%; transform: rotate(0deg); }
@@ -572,7 +586,7 @@ const schedule = [
   </section>
 
   <!-- About -->
-  <section id="nosotros">
+  <section id="nosotros" class="celebration-bg">
     <div class="container">
       <span class="section-label">Sobre nosotros</span>
       <h2 class="section-title">Tu espacio privado para celebrar</h2>
@@ -650,7 +664,7 @@ const schedule = [
   </section>
 
   <!-- Schedule -->
-  <section id="horario">
+  <section id="horario" class="celebration-bg">
     <div class="container text-center">
       <span class="section-label">Horario</span>
       <h2 class="section-title">Horario de apertura</h2>
@@ -670,7 +684,7 @@ const schedule = [
   </section>
 
   <!-- Map -->
-  <section class="map" id="ubicacion">
+  <section class="map celebration-bg" id="ubicacion">
     <div class="container text-center">
       <span class="section-label">Ubicación</span>
       <h2 class="section-title">Encuéntranos fácilmente</h2>
