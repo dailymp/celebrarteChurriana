@@ -398,6 +398,52 @@ const schedule = [
       color: var(--clr-accent); font-weight: 600;
     }
 
+    /* ── Confetti Rain ── */
+    .confetti-container {
+      position: fixed; inset: 0; z-index: 50;
+      pointer-events: none; overflow: hidden;
+    }
+    .confetti {
+      position: absolute; top: -20px;
+      width: 10px; height: 10px;
+      opacity: .7;
+      animation: confettiFall linear infinite, confettiSway ease-in-out infinite;
+    }
+    .confetti:nth-child(odd) { border-radius: 50%; }
+    .confetti:nth-child(3n) { border-radius: 2px; width: 8px; height: 14px; }
+    .confetti:nth-child(5n) { width: 6px; height: 6px; border-radius: 50%; }
+
+    .confetti:nth-child(1)  { left: 3%;  background: #8B5CF6; animation-duration: 8s, 3s;  animation-delay: 0s; opacity: .5; }
+    .confetti:nth-child(2)  { left: 10%; background: #6EE7B7; animation-duration: 10s, 4s; animation-delay: 1s; opacity: .4; }
+    .confetti:nth-child(3)  { left: 18%; background: #F472B6; animation-duration: 7s, 2.5s; animation-delay: 2s; opacity: .55; }
+    .confetti:nth-child(4)  { left: 25%; background: #A78BFA; animation-duration: 11s, 3.5s; animation-delay: 0.5s; opacity: .45; }
+    .confetti:nth-child(5)  { left: 33%; background: #34D399; animation-duration: 9s, 4.5s; animation-delay: 3s; opacity: .5; }
+    .confetti:nth-child(6)  { left: 40%; background: #FCD34D; animation-duration: 8.5s, 3s; animation-delay: 1.5s; opacity: .4; }
+    .confetti:nth-child(7)  { left: 48%; background: #818CF8; animation-duration: 12s, 5s; animation-delay: 0.8s; opacity: .35; }
+    .confetti:nth-child(8)  { left: 55%; background: #6EE7B7; animation-duration: 7.5s, 2.8s; animation-delay: 2.5s; opacity: .5; }
+    .confetti:nth-child(9)  { left: 63%; background: #F472B6; animation-duration: 10.5s, 4.2s; animation-delay: 1.2s; opacity: .45; }
+    .confetti:nth-child(10) { left: 70%; background: #C084FC; animation-duration: 9.5s, 3.8s; animation-delay: 3.5s; opacity: .4; }
+    .confetti:nth-child(11) { left: 78%; background: #34D399; animation-duration: 8s, 3.2s; animation-delay: 0.3s; opacity: .5; }
+    .confetti:nth-child(12) { left: 85%; background: #FCD34D; animation-duration: 11.5s, 4.8s; animation-delay: 2s; opacity: .35; }
+    .confetti:nth-child(13) { left: 92%; background: #8B5CF6; animation-duration: 7.8s, 2.6s; animation-delay: 1.8s; opacity: .45; }
+    .confetti:nth-child(14) { left: 7%;  background: #A78BFA; animation-duration: 10s, 3.6s; animation-delay: 4s; opacity: .4; }
+    .confetti:nth-child(15) { left: 52%; background: #6EE7B7; animation-duration: 9s, 4s;  animation-delay: 0.6s; opacity: .5; }
+
+    @keyframes confettiFall {
+      0%   { top: -5%; transform: rotate(0deg); }
+      100% { top: 105%; transform: rotate(720deg); }
+    }
+    @keyframes confettiSway {
+      0%, 100% { margin-left: 0; }
+      25%  { margin-left: 30px; }
+      50%  { margin-left: -20px; }
+      75%  { margin-left: 15px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .confetti { animation: none; display: none; }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .navbar-links { display: none; }
@@ -413,6 +459,25 @@ const schedule = [
       .hero-buttons { flex-direction: column; align-items: center; }
     }
   </style>
+
+  <!-- Confetti Rain -->
+  <div class="confetti-container" aria-hidden="true">
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+  </div>
 
   <!-- Navbar -->
   <nav class="navbar">
