@@ -32,6 +32,8 @@ const schedule = [
       --clr-accent-dark: #34D399;
       --clr-mint: #10B981;
       --clr-teal: #14B8A6;
+      --clr-orange: #F59E0B;
+      --clr-orange-light: #FBBF24;
       --clr-bg: #FAFAFA;
       --clr-surface: #FFFFFF;
       --clr-text: #1E1B4B;
@@ -142,8 +144,8 @@ const schedule = [
     .hero-badge {
       display: inline-block; padding: .4rem 1.2rem;
       border-radius: 50px; font-size: .8rem; font-weight: 700;
-      background: rgba(110,231,183,.2); color: var(--clr-accent-light);
-      border: 1px solid rgba(110,231,183,.4);
+      background: rgba(245,158,11,.15); color: var(--clr-orange-light);
+      border: 1px solid rgba(245,158,11,.35);
       margin-bottom: 1.5rem; letter-spacing: .05em;
       text-transform: uppercase;
     }
@@ -153,7 +155,7 @@ const schedule = [
       color: #fff; margin-bottom: 1rem;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dark));
+      background: linear-gradient(135deg, var(--clr-accent), var(--clr-orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -170,13 +172,13 @@ const schedule = [
       transition: var(--transition); cursor: pointer; border: none;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--clr-mint), var(--clr-teal));
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
       color: #fff;
       box-shadow: 0 4px 20px rgba(16,185,129,.35);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(16,185,129,.5);
+      box-shadow: 0 6px 28px rgba(245,158,11,.45);
     }
     .btn-outline {
       background: rgba(255,255,255,.1);
@@ -249,7 +251,7 @@ const schedule = [
     .check-icon {
       display: flex; align-items: center; justify-content: center;
       width: 24px; height: 24px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--clr-teal), #10B981);
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
       color: #fff; font-size: .7rem; flex-shrink: 0;
     }
 
@@ -492,7 +494,7 @@ const schedule = [
     }
   </style>
 
-  <!-- Confetti & Balloons -->
+  <!-- Confetti -->
   <div class="confetti-container" aria-hidden="true">
     <div class="confetti"></div>
     <div class="confetti"></div>
@@ -509,6 +511,10 @@ const schedule = [
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
+  </div>
+
+  <!-- Balloons -->
+  <div class="confetti-container" aria-hidden="true">
     <div class="balloon"></div>
     <div class="balloon"></div>
     <div class="balloon"></div>
