@@ -511,6 +511,11 @@ const schedule = [
       66%  { margin-left: -15px; }
     }
 
+    .confetti-container.fade-out {
+      opacity: 0;
+      transition: opacity 2s ease-out;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .confetti, .balloon { animation: none; display: none; }
     }
@@ -922,6 +927,14 @@ const schedule = [
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.navbar-links');
+
+    // Fade out confetti and balloons after 30 seconds
+    setTimeout(() => {
+      document.querySelectorAll('.confetti-container').forEach(el => {
+        el.classList.add('fade-out');
+        el.addEventListener('transitionend', () => el.remove());
+      });
+    }, 30000);
 
     if (menuToggle && navLinks) {
       menuToggle.addEventListener('click', () => {
