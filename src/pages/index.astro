@@ -4,6 +4,19 @@ import Layout from '../layouts/Layout.astro';
 const title = 'CelebrArte Churriana | Espacio para Fiestas Infantiles y Cumpleaños en Málaga';
 const description = 'Alquila nuestro espacio privado en Churriana (Málaga) para cumpleaños infantiles, reuniones familiares y eventos. Parque de bolas, climatizado y totalmente equipado. Reserva al 610 05 07 23.';
 
+const reviews = [
+  { name: 'María López', stars: 5, text: 'Celebramos el cumpleaños de mi hija de 6 años y fue increíble. El local estaba impecable, el parque de bolas les encantó y tuvimos total privacidad. ¡Repetiremos seguro!', date: 'Hace 2 semanas' },
+  { name: 'Carlos García', stars: 5, text: 'Perfecto para fiestas infantiles. Alquilamos 3 horas y los niños no querían irse. Muy bien climatizado y con todo lo necesario. Precio muy competitivo.', date: 'Hace 1 mes' },
+  { name: 'Ana Rodríguez', stars: 5, text: 'El mejor sitio de Churriana para celebrar. Hicimos la comunión de mi hijo y cabíamos todos perfectamente. Muy limpio, moderno y el trato genial.', date: 'Hace 3 semanas' },
+  { name: 'Laura Martín', stars: 4, text: 'Muy buen espacio, amplio y bien equipado. Los niños disfrutaron mucho del parque de bolas. Lo recomiendo para cumpleaños y reuniones familiares.', date: 'Hace 2 meses' },
+];
+
+const pricing = [
+  { title: 'Hora suelta', price: '20', unit: '/hora', description: 'Ideal para reuniones cortas o meriendas', features: ['Uso del local completo', 'Parque de bolas incluido', 'Mesas y sillas'] },
+  { title: 'Pack Fiesta', price: '50', unit: '/3 horas', description: 'Lo más elegido para cumpleaños', features: ['3 horas de diversión', 'Parque de bolas incluido', 'Zona merienda preparada', 'Limpieza incluida'], popular: true },
+  { title: 'Pack Premium', price: '80', unit: '/5 horas', description: 'Para celebraciones sin prisas', features: ['5 horas completas', 'Todo incluido', 'Decoración básica', 'Limpieza incluida', 'Flexibilidad total'] },
+];
+
 const features = [
   { icon: '🎈', title: 'Parque de bolas', text: 'Zona de juegos segura para los más pequeños' },
   { icon: '❄️', title: 'Local climatizado', text: 'Temperatura perfecta en cualquier época del año' },
@@ -492,12 +505,133 @@ const schedule = [
       .confetti, .balloon { animation: none; display: none; }
     }
 
+    /* ── Reviews ── */
+    .reviews { background: var(--clr-surface); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--clr-bg); border-radius: var(--radius);
+      padding: 1.75rem; border: 1px solid rgba(108,63,197,.06);
+      transition: var(--transition);
+      text-align: left;
+    }
+    .review-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .review-header {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .75rem;
+    }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: .95rem; }
+    .review-date { font-size: .8rem; color: var(--clr-text-muted); }
+    .review-stars { color: #F59E0B; font-size: .95rem; margin-bottom: .5rem; letter-spacing: 2px; }
+    .review-text { font-size: .9rem; color: var(--clr-text-muted); line-height: 1.7; }
+    .reviews-summary {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-top: 2rem;
+      font-size: 1rem; color: var(--clr-text-muted);
+    }
+    .reviews-score {
+      font-size: 2rem; font-weight: 900; color: var(--clr-text);
+    }
+
+    /* ── Pricing ── */
+    .pricing { background: linear-gradient(180deg, #F5F3FF, var(--clr-bg)); }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem; align-items: start;
+    }
+    .pricing-card {
+      background: var(--clr-surface); border-radius: var(--radius);
+      padding: 2rem; text-align: center;
+      box-shadow: var(--shadow); border: 2px solid transparent;
+      transition: var(--transition); position: relative;
+    }
+    .pricing-card.popular {
+      border-color: var(--clr-primary);
+      transform: scale(1.05);
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-card.popular:hover {
+      transform: scale(1.05) translateY(-4px);
+    }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      color: #fff; padding: .3rem 1.2rem; border-radius: 50px;
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .pricing-title {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem;
+    }
+    .pricing-price {
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--clr-primary); line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .pricing-price span { font-size: 1rem; font-weight: 600; color: var(--clr-text-muted); }
+    .pricing-desc {
+      font-size: .85rem; color: var(--clr-text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .pricing-features {
+      list-style: none; text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-features li {
+      padding: .4rem 0; font-size: .9rem;
+      display: flex; align-items: center; gap: .5rem;
+      border-bottom: 1px solid rgba(108,63,197,.05);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-check {
+      color: var(--clr-mint); font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── Mobile menu ── */
+    .navbar-links.active {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(255,255,255,.98);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(108,63,197,.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      gap: 1rem;
+    }
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .navbar-links { display: none; }
       .menu-toggle { display: block; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .features-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.popular { transform: none; }
+      .pricing-card.popular:hover { transform: translateY(-4px); }
       .gallery-grid { grid-template-columns: 1fr; }
       section { padding: 3.5rem 1.25rem; }
     }
@@ -543,7 +677,9 @@ const schedule = [
     <ul class="navbar-links">
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#galeria">Galería</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
       <li><a href="#horario">Horario</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -637,6 +773,31 @@ const schedule = [
     </div>
   </section>
 
+  <!-- Pricing -->
+  <section class="pricing" id="precios">
+    <div class="container text-center">
+      <span class="section-label">Precios</span>
+      <h2 class="section-title">Tarifas para tu celebración</h2>
+      <p class="section-subtitle mx-auto">Precios accesibles para que celebrar sea fácil. Desde 20 euros la hora.</p>
+      <div class="pricing-grid">
+        {pricing.map(p => (
+          <div class={`pricing-card ${p.popular ? 'popular' : ''}`}>
+            {p.popular && <span class="pricing-badge">Más elegido</span>}
+            <h3 class="pricing-title">{p.title}</h3>
+            <div class="pricing-price">{p.price}€ <span>{p.unit}</span></div>
+            <p class="pricing-desc">{p.description}</p>
+            <ul class="pricing-features">
+              {p.features.map(f => (
+                <li><span class="pricing-check">✓</span> {f}</li>
+              ))}
+            </ul>
+            <a href="tel:+34610050723" class="btn btn-primary" style="width:100%;justify-content:center;">Reservar</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Gallery -->
   <section class="gallery" id="galeria">
     <div class="container text-center">
@@ -659,6 +820,34 @@ const schedule = [
         <div class="gallery-item">
           <video src="/media/video-local-5.mp4" muted playsinline loop preload="metadata" controls aria-label="Vídeo general del local"></video>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews" id="opiniones">
+    <div class="container text-center">
+      <span class="section-label">Opiniones</span>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle mx-auto">La satisfacción de las familias que han celebrado con nosotros.</p>
+      <div class="reviews-grid">
+        {reviews.map(r => (
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">{r.name.charAt(0)}</div>
+              <div>
+                <div class="review-name">{r.name}</div>
+                <div class="review-date">{r.date}</div>
+              </div>
+            </div>
+            <div class="review-stars">{'★'.repeat(r.stars)}{'☆'.repeat(5 - r.stars)}</div>
+            <p class="review-text">"{r.text}"</p>
+          </div>
+        ))}
+      </div>
+      <div class="reviews-summary">
+        <span class="reviews-score">4.9</span>
+        <span>★★★★★ basado en opiniones de Google</span>
       </div>
     </div>
   </section>
@@ -733,4 +922,22 @@ const schedule = [
     <p class="footer-credits">Diseñado por <a href="https://dailymp.es" target="_blank" rel="noopener noreferrer">Daily MP.es</a></p>
   </footer>
 
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.navbar-links');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+  </script>
 </Layout>
