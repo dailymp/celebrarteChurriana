@@ -4,6 +4,29 @@ import Layout from '../layouts/Layout.astro';
 const title = 'CelebrArte Churriana | Espacio para Fiestas Infantiles y Cumpleaños en Málaga';
 const description = 'Alquila nuestro espacio privado en Churriana (Málaga) para cumpleaños infantiles, reuniones familiares y eventos. Parque de bolas, climatizado y totalmente equipado. Reserva al 610 05 07 23.';
 
+const reviews = [
+  { name: 'María López', stars: 5, text: 'Celebramos el cumpleaños de mi hija de 6 años y fue increíble. El local estaba impecable, el parque de bolas les encantó y tuvimos total privacidad. ¡Repetiremos seguro!', date: 'Hace 2 semanas' },
+  { name: 'Carlos García', stars: 5, text: 'Perfecto para fiestas infantiles. Alquilamos 3 horas y los niños no querían irse. Muy bien climatizado y con todo lo necesario. Precio muy competitivo.', date: 'Hace 1 mes' },
+  { name: 'Ana Rodríguez', stars: 5, text: 'El mejor sitio de Churriana para celebrar. Hicimos la comunión de mi hijo y cabíamos todos perfectamente. Muy limpio, moderno y el trato genial.', date: 'Hace 3 semanas' },
+  { name: 'Laura Martín', stars: 4, text: 'Muy buen espacio, amplio y bien equipado. Los niños disfrutaron mucho del parque de bolas. Lo recomiendo para cumpleaños y reuniones familiares.', date: 'Hace 2 meses' },
+];
+
+const pricing = [
+  { title: 'Mañanas', rows: [
+    { label: 'Lunes a Viernes', time: '9:00–14:00', price: '95' },
+    { label: 'Sábados y Domingos', time: '9:00–13:00', price: '95' },
+  ]},
+  { title: 'Tardes', time: '15:00–21:00', rows: [
+    { label: 'Lunes a Jueves', price: '125' },
+    { label: 'Viernes y víspera de festivo', price: '140' },
+    { label: 'Sábados, domingos y festivos', price: '160' },
+  ]},
+  { title: 'Hora extra', rows: [
+    { label: 'Lunes a Jueves', price: '20' },
+    { label: 'Vie, Sáb, Dom y festivos', price: '35' },
+  ]},
+];
+
 const features = [
   { icon: '🎈', title: 'Parque de bolas', text: 'Zona de juegos segura para los más pequeños' },
   { icon: '❄️', title: 'Local climatizado', text: 'Temperatura perfecta en cualquier época del año' },
@@ -32,6 +55,8 @@ const schedule = [
       --clr-accent-dark: #34D399;
       --clr-mint: #10B981;
       --clr-teal: #14B8A6;
+      --clr-orange: #F59E0B;
+      --clr-orange-light: #FBBF24;
       --clr-bg: #FAFAFA;
       --clr-surface: #FFFFFF;
       --clr-text: #1E1B4B;
@@ -66,7 +91,7 @@ const schedule = [
     }
     .navbar-brand {
       font-size: 1.35rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--clr-primary), var(--clr-mint));
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -142,8 +167,8 @@ const schedule = [
     .hero-badge {
       display: inline-block; padding: .4rem 1.2rem;
       border-radius: 50px; font-size: .8rem; font-weight: 700;
-      background: rgba(110,231,183,.2); color: var(--clr-accent-light);
-      border: 1px solid rgba(110,231,183,.4);
+      background: rgba(245,158,11,.15); color: var(--clr-orange-light);
+      border: 1px solid rgba(245,158,11,.35);
       margin-bottom: 1.5rem; letter-spacing: .05em;
       text-transform: uppercase;
     }
@@ -153,7 +178,7 @@ const schedule = [
       color: #fff; margin-bottom: 1rem;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dark));
+      background: linear-gradient(135deg, var(--clr-accent), var(--clr-orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -170,13 +195,13 @@ const schedule = [
       transition: var(--transition); cursor: pointer; border: none;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--clr-mint), var(--clr-teal));
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
       color: #fff;
       box-shadow: 0 4px 20px rgba(16,185,129,.35);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(16,185,129,.5);
+      box-shadow: 0 6px 28px rgba(245,158,11,.45);
     }
     .btn-outline {
       background: rgba(255,255,255,.1);
@@ -197,6 +222,18 @@ const schedule = [
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ── Celebration pattern background ── */
+    .celebration-bg {
+      position: relative;
+    }
+    .celebration-bg::before {
+      content: ''; position: absolute; inset: 0;
+      opacity: .04; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ctext x='20' y='40' font-size='24'%3E%F0%9F%8E%88%3C/text%3E%3Ctext x='120' y='80' font-size='18'%3E%E2%AD%90%3C/text%3E%3Ctext x='60' y='130' font-size='20'%3E%F0%9F%8E%89%3C/text%3E%3Ctext x='150' y='170' font-size='22'%3E%F0%9F%8E%8A%3C/text%3E%3Ctext x='30' y='180' font-size='16'%3E%E2%9C%A8%3C/text%3E%3Ctext x='160' y='30' font-size='18'%3E%F0%9F%8E%81%3C/text%3E%3Ctext x='90' y='60' font-size='14'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      background-attachment: fixed;
     }
 
     /* ── Section common ── */
@@ -249,7 +286,7 @@ const schedule = [
     .check-icon {
       display: flex; align-items: center; justify-content: center;
       width: 24px; height: 24px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--clr-teal), #10B981);
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
       color: #fff; font-size: .7rem; flex-shrink: 0;
     }
 
@@ -344,7 +381,9 @@ const schedule = [
     .cta-phone {
       display: inline-flex; align-items: center; gap: .75rem;
       font-size: 1.8rem; font-weight: 900;
-      color: var(--clr-accent);
+      background: linear-gradient(135deg, var(--clr-mint), var(--clr-orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 1.5rem;
     }
 
@@ -362,7 +401,7 @@ const schedule = [
       text-align: center; padding: 2.5rem 2rem;
       font-size: .85rem;
     }
-    footer a { color: var(--clr-accent); }
+    footer a { color: var(--clr-orange-light); }
     footer .footer-brand {
       font-size: 1.2rem; font-weight: 800; color: #fff;
       margin-bottom: .5rem; display: block;
@@ -395,7 +434,7 @@ const schedule = [
       font-size: .8rem; color: rgba(255,255,255,.4);
     }
     .footer-credits a {
-      color: var(--clr-accent); font-weight: 600;
+      color: var(--clr-orange-light); font-weight: 600;
     }
 
     /* ── Confetti Rain ── */
@@ -414,20 +453,20 @@ const schedule = [
     .confetti:nth-child(5n) { width: 6px; height: 6px; border-radius: 50%; }
 
     .confetti:nth-child(1)  { left: 3%;  background: #8B5CF6; animation-duration: 8s, 3s;  animation-delay: 0s; opacity: .5; }
-    .confetti:nth-child(2)  { left: 10%; background: #6EE7B7; animation-duration: 10s, 4s; animation-delay: 1s; opacity: .4; }
+    .confetti:nth-child(2)  { left: 10%; background: #F59E0B; animation-duration: 10s, 4s; animation-delay: 1s; opacity: .4; }
     .confetti:nth-child(3)  { left: 18%; background: #F472B6; animation-duration: 7s, 2.5s; animation-delay: 2s; opacity: .55; }
     .confetti:nth-child(4)  { left: 25%; background: #A78BFA; animation-duration: 11s, 3.5s; animation-delay: 0.5s; opacity: .45; }
     .confetti:nth-child(5)  { left: 33%; background: #34D399; animation-duration: 9s, 4.5s; animation-delay: 3s; opacity: .5; }
     .confetti:nth-child(6)  { left: 40%; background: #FCD34D; animation-duration: 8.5s, 3s; animation-delay: 1.5s; opacity: .4; }
     .confetti:nth-child(7)  { left: 48%; background: #818CF8; animation-duration: 12s, 5s; animation-delay: 0.8s; opacity: .35; }
-    .confetti:nth-child(8)  { left: 55%; background: #6EE7B7; animation-duration: 7.5s, 2.8s; animation-delay: 2.5s; opacity: .5; }
+    .confetti:nth-child(8)  { left: 55%; background: #FBBF24; animation-duration: 7.5s, 2.8s; animation-delay: 2.5s; opacity: .5; }
     .confetti:nth-child(9)  { left: 63%; background: #F472B6; animation-duration: 10.5s, 4.2s; animation-delay: 1.2s; opacity: .45; }
     .confetti:nth-child(10) { left: 70%; background: #C084FC; animation-duration: 9.5s, 3.8s; animation-delay: 3.5s; opacity: .4; }
     .confetti:nth-child(11) { left: 78%; background: #34D399; animation-duration: 8s, 3.2s; animation-delay: 0.3s; opacity: .5; }
     .confetti:nth-child(12) { left: 85%; background: #FCD34D; animation-duration: 11.5s, 4.8s; animation-delay: 2s; opacity: .35; }
     .confetti:nth-child(13) { left: 92%; background: #8B5CF6; animation-duration: 7.8s, 2.6s; animation-delay: 1.8s; opacity: .45; }
     .confetti:nth-child(14) { left: 7%;  background: #A78BFA; animation-duration: 10s, 3.6s; animation-delay: 4s; opacity: .4; }
-    .confetti:nth-child(15) { left: 52%; background: #6EE7B7; animation-duration: 9s, 4s;  animation-delay: 0.6s; opacity: .5; }
+    .confetti:nth-child(15) { left: 52%; background: #F59E0B; animation-duration: 9s, 4s;  animation-delay: 0.6s; opacity: .5; }
 
     @keyframes confettiFall {
       0%   { top: -5%; transform: rotate(0deg); }
@@ -472,8 +511,111 @@ const schedule = [
       66%  { margin-left: -15px; }
     }
 
+    .confetti-container.fade-out {
+      opacity: 0;
+      transition: opacity 2s ease-out;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .confetti, .balloon { animation: none; display: none; }
+    }
+
+    /* ── Reviews ── */
+    .reviews { background: var(--clr-surface); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--clr-bg); border-radius: var(--radius);
+      padding: 1.75rem; border: 1px solid rgba(108,63,197,.06);
+      transition: var(--transition);
+      text-align: left;
+    }
+    .review-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .review-header {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .75rem;
+    }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: .95rem; }
+    .review-date { font-size: .8rem; color: var(--clr-text-muted); }
+    .review-stars { color: #F59E0B; font-size: .95rem; margin-bottom: .5rem; letter-spacing: 2px; }
+    .review-text { font-size: .9rem; color: var(--clr-text-muted); line-height: 1.7; }
+    .reviews-summary {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-top: 2rem;
+      font-size: 1rem; color: var(--clr-text-muted);
+    }
+    .reviews-score {
+      font-size: 2rem; font-weight: 900; color: var(--clr-text);
+    }
+
+    /* ── Pricing ── */
+    .pricing { background: linear-gradient(180deg, #F5F3FF, var(--clr-bg)); }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem; align-items: start;
+    }
+    .pricing-card {
+      background: var(--clr-surface); border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow); border: 1px solid rgba(108,63,197,.06);
+      transition: var(--transition);
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-card-header {
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-light));
+      color: #fff; padding: 1rem 1.5rem;
+      font-weight: 800; font-size: 1.1rem; text-align: center;
+    }
+    .pricing-card-header small {
+      display: block; font-weight: 500; font-size: .8rem;
+      opacity: .85; margin-top: .2rem;
+    }
+    .pricing-card-body { padding: 1.25rem 1.5rem; }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .7rem 0;
+      border-bottom: 1px solid rgba(108,63,197,.06);
+    }
+    .pricing-row:last-child { border-bottom: none; }
+    .pricing-label { font-size: .9rem; font-weight: 600; }
+    .pricing-label small { display: block; font-weight: 400; color: var(--clr-text-muted); font-size: .8rem; }
+    .pricing-amount {
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--clr-primary); white-space: nowrap;
+    }
+    .pricing-amount span { font-size: .85rem; font-weight: 600; }
+
+    /* ── Mobile menu ── */
+    .navbar-links.active {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(255,255,255,.98);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(108,63,197,.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      gap: 1rem;
+    }
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
     }
 
     /* ── Responsive ── */
@@ -482,6 +624,8 @@ const schedule = [
       .menu-toggle { display: block; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .features-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
       section { padding: 3.5rem 1.25rem; }
     }
@@ -492,7 +636,7 @@ const schedule = [
     }
   </style>
 
-  <!-- Confetti & Balloons -->
+  <!-- Confetti -->
   <div class="confetti-container" aria-hidden="true">
     <div class="confetti"></div>
     <div class="confetti"></div>
@@ -509,6 +653,10 @@ const schedule = [
     <div class="confetti"></div>
     <div class="confetti"></div>
     <div class="confetti"></div>
+  </div>
+
+  <!-- Balloons -->
+  <div class="confetti-container" aria-hidden="true">
     <div class="balloon"></div>
     <div class="balloon"></div>
     <div class="balloon"></div>
@@ -523,7 +671,9 @@ const schedule = [
     <ul class="navbar-links">
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#precios">Precios</a></li>
       <li><a href="#galeria">Galería</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
       <li><a href="#horario">Horario</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -566,7 +716,7 @@ const schedule = [
   </section>
 
   <!-- About -->
-  <section id="nosotros">
+  <section id="nosotros" class="celebration-bg">
     <div class="container">
       <span class="section-label">Sobre nosotros</span>
       <h2 class="section-title">Tu espacio privado para celebrar</h2>
@@ -617,6 +767,39 @@ const schedule = [
     </div>
   </section>
 
+  <!-- Pricing -->
+  <section class="pricing" id="precios">
+    <div class="container text-center">
+      <span class="section-label">Precios</span>
+      <h2 class="section-title">Tarifas para tu celebración</h2>
+      <p class="section-subtitle mx-auto">Consulta nuestras tarifas y elige la que mejor se adapte a tu evento.</p>
+      <div class="pricing-grid">
+        {pricing.map(p => (
+          <div class="pricing-card">
+            <div class="pricing-card-header">
+              {p.title}
+              {p.time && <small>{p.time}</small>}
+            </div>
+            <div class="pricing-card-body">
+              {p.rows.map(r => (
+                <div class="pricing-row">
+                  <span class="pricing-label">
+                    {r.label}
+                    {r.time && <small>{r.time}</small>}
+                  </span>
+                  <span class="pricing-amount">{r.price}<span>€</span></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem; font-size:.9rem; color:var(--clr-text-muted);">
+        Consulta nuestra <strong>tarifa especial</strong> para día completo. Llámanos para más info.
+      </p>
+    </div>
+  </section>
+
   <!-- Gallery -->
   <section class="gallery" id="galeria">
     <div class="container text-center">
@@ -643,8 +826,36 @@ const schedule = [
     </div>
   </section>
 
+  <!-- Reviews -->
+  <section class="reviews" id="opiniones">
+    <div class="container text-center">
+      <span class="section-label">Opiniones</span>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle mx-auto">La satisfacción de las familias que han celebrado con nosotros.</p>
+      <div class="reviews-grid">
+        {reviews.map(r => (
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">{r.name.charAt(0)}</div>
+              <div>
+                <div class="review-name">{r.name}</div>
+                <div class="review-date">{r.date}</div>
+              </div>
+            </div>
+            <div class="review-stars">{'★'.repeat(r.stars)}{'☆'.repeat(5 - r.stars)}</div>
+            <p class="review-text">"{r.text}"</p>
+          </div>
+        ))}
+      </div>
+      <div class="reviews-summary">
+        <span class="reviews-score">4.9</span>
+        <span>★★★★★ basado en opiniones de Google</span>
+      </div>
+    </div>
+  </section>
+
   <!-- Schedule -->
-  <section id="horario">
+  <section id="horario" class="celebration-bg">
     <div class="container text-center">
       <span class="section-label">Horario</span>
       <h2 class="section-title">Horario de apertura</h2>
@@ -664,7 +875,7 @@ const schedule = [
   </section>
 
   <!-- Map -->
-  <section class="map" id="ubicacion">
+  <section class="map celebration-bg" id="ubicacion">
     <div class="container text-center">
       <span class="section-label">Ubicación</span>
       <h2 class="section-title">Encuéntranos fácilmente</h2>
@@ -713,4 +924,30 @@ const schedule = [
     <p class="footer-credits">Diseñado por <a href="https://dailymp.es" target="_blank" rel="noopener noreferrer">Daily MP.es</a></p>
   </footer>
 
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.navbar-links');
+
+    // Fade out confetti and balloons after 30 seconds
+    setTimeout(() => {
+      document.querySelectorAll('.confetti-container').forEach(el => {
+        el.classList.add('fade-out');
+        el.addEventListener('transitionend', () => el.remove());
+      });
+    }, 30000);
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+  </script>
 </Layout>
